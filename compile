@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+#判断当前是否已有tag
+hasTag=$(git rev-list --tags --max-count=1)
+if [ "$hasTag" ]; then
+  echo "Current tag: $(git describe --tags "$(git rev-list --tags --max-count=1)")"
+else
+  echo -e "\033[31mNo first tag.\033[0m"
+fi
+
+# 设置新TAG
+echo -n "Entry new tag: "
+read -r version
+
+if [ "$version" ]; then
+  echo "New tag: $version"
+  git tag "$version"
+  git push origin --tag
+else
+  echo -e "\033[33mEmpty tag...\nOnly build old version.\033[0m"
+fi
+
+hasTag=$(git rev-list --tags --max-count=1)
+if [ "$hasTag" ]; then
+  ## 无新代码提交，版本号不会发生变化
+  box compile -q
+  echo -e "\033[32m🚀Compile completed.\033[0m"
+else
+  echo -e "\033[31mNo git tag, unable compile.\033[0m"
+fi
+
+exit 0

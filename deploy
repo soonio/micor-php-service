@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+./compile
+
+ssh -p22 root@192.168.10.3 "mkdir -p /data/www/enum"
+scp ./serve.phar root@192.168.10.3:/data/www/enum/
+ssh -p22 root@192.168.10.3 "/usr/bin/supervisorctl restart energy"
+ssh -p22 root@192.168.10.3 "tail -n 5 /data/www/enum/runtime/energy-out.log"
+
+exit 0

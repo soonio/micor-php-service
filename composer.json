@@ -1,0 +1,28 @@
+{
+  "name": "shiren/energy",
+  "authors": [
+    {
+      "name": "qingliu",
+      "email": "soonio@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*",
+    "shiren/te": "^2",
+    "nategood/commando": "^0.4.0"
+  },
+  "require-dev": {
+    "swoole/ide-helper": "*"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    },
+    {
+      "type": "vcs",
+      "url": "https://e.coding.net/sh-10in/algorithm/te.git"
+    }
+  ]
+}
